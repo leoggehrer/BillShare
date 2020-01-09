@@ -27,3 +27,7 @@ Erstellen einer Konsolenanwendung zum Testen der Struktur. Projektname wird wie 
 **Hinweis:** Im weiteren Ausbau werden noch weitere Projekte hinzugefügt (z.B.: Rest-Service).  
 **Schritt 5**  
 Abhänigkeiten definieren.
+
+## Schnittstellen definieren
+
+![Schnittstellen](Contracts.png)

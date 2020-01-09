@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="BillShare.Contracts.IIdentifiable">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IIdentifiable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BillShare.Contracts.ICopyable&lt;T&gt;">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICopyable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BillShare.Contracts.Persistence.IBill">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAgAEAAAAAAAAAACAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Persistence\IBill.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BillShare.Contracts.Persistence.IExpense">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAACAAAAAAgAACAAAAAAAAAA=</HashCode>
+      <FileName>Persistence\IExpense.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
