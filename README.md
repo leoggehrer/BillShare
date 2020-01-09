@@ -30,4 +30,9 @@ Abhänigkeiten definieren.
 
 ## Schnittstellen definieren
 
-![Schnittstellen](Contracts.png)
+![Schnittstellen](Contracts.png)  
+
+## Entitäten definieren
+
+![Entitäten](Entities.png)
+
