@@ -12,6 +12,9 @@ namespace BillShare.Logic.DataContext.Db
     {
         private static string ConnectionString { get; set; } = "Data Source=(localdb)\\MSSQLLocalDb;Database=BillShareDb;Integrated Security=True;";
 
+        public DbSet<Bill> Bills { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+
         #region Configuration
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
