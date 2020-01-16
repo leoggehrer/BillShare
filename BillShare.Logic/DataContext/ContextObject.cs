@@ -1,12 +1,32 @@
 ﻿using BillShare.Contracts;
 using BillShare.Logic.Entities;
-using System;
 using System.Threading.Tasks;
 
 namespace BillShare.Logic.DataContext
 {
     internal abstract partial class ContextObject : IContext
     {
+        public abstract Task<int> CountAsync<I, E>()
+            where I : IIdentifiable
+            where E : IdentityObject, I;
+
+        public abstract Task<E> CreateAsync<I, E>()
+            where I : IIdentifiable
+            where E : IdentityObject, ICopyable<I>, I, new();
+
+        public abstract Task<E> InsertAsync<I, E>(I entity)
+            where I : IIdentifiable
+            where E : IdentityObject, ICopyable<I>, I, new();
+
+        public abstract Task<E> UpdateAsync<I, E>(I entity)
+            where I : IIdentifiable
+            where E : IdentityObject, ICopyable<I>, I, new();
+
+        public abstract Task<E> DeleteAsync<I, E>(int id)
+            where I : IIdentifiable
+            where E : IdentityObject, I;
+
+        public abstract Task SaveAsync();
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
@@ -42,28 +62,6 @@ namespace BillShare.Logic.DataContext
             // TODO: uncomment the following line if the finalizer is overridden above.
             // GC.SuppressFinalize(this);
         }
-
-        public abstract Task<int> CountAsync<I, E>()
-            where I : IIdentifiable
-            where E : IdentityObject, I;
-
-        public abstract Task<E> CreateAsync<I, E>()
-            where I : IIdentifiable
-            where E : IdentityObject, ICopyable<I>, I, new();
-
-        public abstract Task<E> InsertAsync<I, E>(I entity)
-            where I : IIdentifiable
-            where E : IdentityObject, ICopyable<I>, I, new();
-
-        public abstract Task<E> UpdateAsync<I, E>(I entity)
-            where I : IIdentifiable
-            where E : IdentityObject, ICopyable<I>, I, new();
-
-        public abstract Task<E> DeleteAsync<I, E>(int id)
-            where I : IIdentifiable
-            where E : IdentityObject, I;
-
-        public abstract Task SaveAsync();
         #endregion
     }
 }
