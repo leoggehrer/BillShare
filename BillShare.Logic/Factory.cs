@@ -47,5 +47,20 @@ namespace BillShare.Logic
         {
             return new Controllers.Persistence.ExpenseController(CreateContext());
         }
+
+        public static IControllerAccess<Contracts.Business.IBillExpense> CreateBillExpenseController()
+        {
+            return new Controllers.Business.BillExpenseController(CreateContext());
+        }
+        public static IControllerAccess<Contracts.Business.IBillExpense> CreateBillExpenseController(object sharedController)
+        {
+            if (sharedController == null)
+                throw new ArgumentNullException(nameof(sharedController));
+
+            Controllers.ControllerObject controller = (Controllers.ControllerObject)sharedController;
+
+            return new Controllers.Business.BillExpenseController(controller);
+        }
+
     }
 }

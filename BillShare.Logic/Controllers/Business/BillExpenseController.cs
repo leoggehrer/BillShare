@@ -7,6 +7,7 @@ using BillShare.Logic.Entities.Persistence;
 using CommonBase.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,7 +62,7 @@ namespace BillShare.Logic.Controllers.Business
         {
             List<IBillExpense> result = new List<IBillExpense>();
 
-            foreach (var item in await billController.GetAllAsync())
+            foreach (var item in (await billController.GetAllAsync()).ToList())
             {
                 result.Add(await GetByIdAsync(item.Id));
             }
@@ -70,20 +71,21 @@ namespace BillShare.Logic.Controllers.Business
 
         public async Task<IBillExpense> GetByIdAsync(int id)
         {
-            var result = new BillExpense();
+            var result = default(BillExpense);
             var bill = await billController.GetByIdAsync(id);
 
             if (bill != null)
             {
-                result.BillEntity.CopyProperties(bill);
-
-                foreach (var item in await expenseController.GetAllAsync())
+                result = new BillExpense();
+                result.Bill.CopyProperties(bill);
+                foreach (var item in await expenseController.QueryAsync(e => e.BillId == id))
                 {
-                    if (item.BillId == bill.Id)
-                    {
-                        result.Add(item);
-                    }
+                    result.ExpenseEntities.Add(item);
                 }
+            }
+            else
+            {
+                throw new Exception("Entity can't find!");
             }
             return result;
         }
@@ -107,7 +109,47 @@ namespace BillShare.Logic.Controllers.Business
                 expense.Bill = result.BillEntity;
 
                 await expenseController.InsertAsync(expense);
-                result.Add(expense);
+                result.ExpenseEntities.Add(expense);
+            }
+            return result;
+        }
+
+        public async Task<IBillExpense> UpdateAsync(IBillExpense entity)
+        {
+            entity.CheckArgument(nameof(entity));
+            entity.Bill.CheckArgument(nameof(entity.Bill));
+            entity.Expenses.CheckArgument(nameof(entity.Expenses));
+
+            //Delete all costs that are no longer included in the list.
+            foreach (var item in await expenseController.QueryAsync(e => e.BillId == entity.Bill.Id))
+            {
+                var tmpExpense = entity.Expenses.SingleOrDefault(i => i.Id == item.Id);
+
+                if (tmpExpense == null)
+                {
+                    await expenseController.DeleteAsync(item.Id);
+                }
+            }
+
+            var result = new BillExpense();
+            var bill = await billController.UpdateAsync(entity.Bill);
+
+            result.BillEntity.CopyProperties(bill);
+            foreach (var item in entity.Expenses)
+            {
+                if (item.Id == 0)
+                {
+                    item.BillId = entity.Bill.Id;
+                    var insEntity = await expenseController.InsertAsync(item);
+
+                    item.CopyProperties(insEntity);
+                }
+                else
+                {
+                    var updEntity = await expenseController.UpdateAsync(item);
+
+                    item.CopyProperties(updEntity);
+                }
             }
             return result;
         }
@@ -115,11 +157,6 @@ namespace BillShare.Logic.Controllers.Business
         public Task SaveChangesAsync()
         {
             return Context.SaveAsync();
-        }
-
-        public Task<IBillExpense> UpdateAsync(IBillExpense entity)
-        {
-            throw new NotImplementedException();
         }
 
         protected override void Dispose(bool disposing)
