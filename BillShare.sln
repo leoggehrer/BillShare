@@ -9,13 +9,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonBase", "CommonBase\CommonBase.csproj", "{69D3A358-79EA-4357-BCF7-FF99E9CBE681}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonBase", "CommonBase\CommonBase.csproj", "{69D3A358-79EA-4357-BCF7-FF99E9CBE681}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillShare.Contracts", "BillShare.Contracts\BillShare.Contracts.csproj", "{163854B9-A1AA-4FC5-96A1-004DCB2BF7B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillShare.Contracts", "BillShare.Contracts\BillShare.Contracts.csproj", "{163854B9-A1AA-4FC5-96A1-004DCB2BF7B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillShare.Logic", "BillShare.Logic\BillShare.Logic.csproj", "{89256324-2EBA-4B43-82DD-3A8F0A17BD21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillShare.Logic", "BillShare.Logic\BillShare.Logic.csproj", "{89256324-2EBA-4B43-82DD-3A8F0A17BD21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillShare.ConApp", "BillShare.ConApp\BillShare.ConApp.csproj", "{547A5E01-B114-456B-8200-F1D599B942C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BillShare.ConApp", "BillShare.ConApp\BillShare.ConApp.csproj", "{547A5E01-B114-456B-8200-F1D599B942C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillShare.WebApi", "BillShare.WebApi\BillShare.WebApi.csproj", "{CD37CB04-80C1-401D-AEBB-E9B3CCAD3C5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillShare.Transfer", "BillShare.Transfer\BillShare.Transfer.csproj", "{5A113F86-7810-4691-8842-D25169E5DD8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{547A5E01-B114-456B-8200-F1D599B942C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{547A5E01-B114-456B-8200-F1D599B942C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{547A5E01-B114-456B-8200-F1D599B942C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD37CB04-80C1-401D-AEBB-E9B3CCAD3C5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD37CB04-80C1-401D-AEBB-E9B3CCAD3C5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD37CB04-80C1-401D-AEBB-E9B3CCAD3C5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD37CB04-80C1-401D-AEBB-E9B3CCAD3C5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A113F86-7810-4691-8842-D25169E5DD8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A113F86-7810-4691-8842-D25169E5DD8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A113F86-7810-4691-8842-D25169E5DD8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A113F86-7810-4691-8842-D25169E5DD8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

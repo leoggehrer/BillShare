@@ -1,15 +1,14 @@
-﻿using BillShare.Contracts.Business;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using CommonBase.Extensions;
+using BillShare.Contracts.Business;
 using BillShare.Contracts.Client;
 using BillShare.Logic.Controllers.Persistence;
 using BillShare.Logic.DataContext;
 using BillShare.Logic.Entities.Business;
 using BillShare.Logic.Entities.Persistence;
-using CommonBase.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BillShare.Logic.Controllers.Business
 {
@@ -30,32 +29,14 @@ namespace BillShare.Logic.Controllers.Business
             billController = new BillController(this);
             expenseController = new ExpenseController(this);
         }
+
         public Task<int> CountAsync()
         {
             return billController.CountAsync();
         }
-
         public Task<IBillExpense> CreateAsync()
         {
             return Task.Run<IBillExpense>(() => new BillExpense());
-        }
-
-        public async Task DeleteAsync(int id)
-        {
-            var deleteItem = await GetByIdAsync(id);
-
-            if (deleteItem != null)
-            {
-                foreach (var item in deleteItem.Expenses)
-                {
-                    await expenseController.DeleteAsync(item.Id);
-                }
-                await billController.DeleteAsync(deleteItem.Id);
-            }
-            else
-            {
-                throw new Exception("Item not found!");
-            }
         }
 
         public async Task<IEnumerable<IBillExpense>> GetAllAsync()
@@ -68,7 +49,6 @@ namespace BillShare.Logic.Controllers.Business
             }
             return result;
         }
-
         public async Task<IBillExpense> GetByIdAsync(int id)
         {
             var result = default(BillExpense);
@@ -89,7 +69,6 @@ namespace BillShare.Logic.Controllers.Business
             }
             return result;
         }
-
         public async Task<IBillExpense> InsertAsync(IBillExpense entity)
         {
             entity.CheckArgument(nameof(entity));
@@ -113,7 +92,6 @@ namespace BillShare.Logic.Controllers.Business
             }
             return result;
         }
-
         public async Task<IBillExpense> UpdateAsync(IBillExpense entity)
         {
             entity.CheckArgument(nameof(entity));
@@ -152,6 +130,23 @@ namespace BillShare.Logic.Controllers.Business
                 }
             }
             return result;
+        }
+        public async Task DeleteAsync(int id)
+        {
+            var deleteItem = await GetByIdAsync(id);
+
+            if (deleteItem != null)
+            {
+                foreach (var item in deleteItem.Expenses)
+                {
+                    await expenseController.DeleteAsync(item.Id);
+                }
+                await billController.DeleteAsync(deleteItem.Id);
+            }
+            else
+            {
+                throw new Exception("Item not found!");
+            }
         }
 
         public Task SaveChangesAsync()

@@ -39,7 +39,34 @@ namespace BillShare.Logic.Entities.Business
 
         private IEnumerable<IBalance> CreateBalance()
         {
-            return new IBalance[0];
+            List<Balance> result = new List<Balance>();
+            var friendPart = FriendPortion;
+            var friendAmounts = FriendAmounts;
+            var friendsAndAmounts = Friends.Select((f, i) => new { Friend = f, Amount = FriendAmounts[i] });
+            var gives = friendsAndAmounts.Where(i => i.Amount < friendPart);
+            var gets = friendsAndAmounts.Where(i => i.Amount > friendPart);
+
+            foreach (var give in gives)
+            {
+                double giveDif = friendPart - give.Amount;
+
+                if (Math.Abs(giveDif) > 0.001)
+                {
+                    foreach (var get in gets)
+                    {
+                        var dif = get.Amount - friendPart - result.Where(i => i.To.Equals(get.Friend)).Sum(i => i.Amount);
+
+                        if (giveDif > 0.01 && dif > 0.01)
+                        {
+                            var minDif = Math.Min(dif, giveDif);
+
+                            result.Add(new Balance { From = give.Friend, To = get.Friend, Amount = minDif });
+                            giveDif = giveDif - minDif;
+                        }
+                    }
+                }
+            }
+            return result;
         }
         public IExpense CreateExpense()
         {
