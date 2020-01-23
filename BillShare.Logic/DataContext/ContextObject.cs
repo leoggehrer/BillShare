@@ -14,11 +14,11 @@ namespace BillShare.Logic.DataContext
             where I : IIdentifiable
             where E : IdentityObject, ICopyable<I>, I, new();
 
-        public abstract Task<E> InsertAsync<I, E>(I entity)
+        public abstract Task<E> InsertAsync<I, E>(E entity)
             where I : IIdentifiable
             where E : IdentityObject, ICopyable<I>, I, new();
 
-        public abstract Task<E> UpdateAsync<I, E>(I entity)
+        public abstract Task<E> UpdateAsync<I, E>(E entity)
             where I : IIdentifiable
             where E : IdentityObject, ICopyable<I>, I, new();
 
